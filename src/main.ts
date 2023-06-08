@@ -37,7 +37,7 @@ function createBoard() {
 const board = createBoard()
 
 function drawSnake(board: HTMLElement) {
-  ;[...board.children].forEach((square) =>
+  Array.from(board.children).forEach((square) =>
     square.classList.remove("snake-square")
   )
   snake.forEach((coord) => {
@@ -47,10 +47,10 @@ function drawSnake(board: HTMLElement) {
   })
 }
 
-function updateSnake(direction: Direction) {
+function updateSnake() {
   snake.pop()
   const [xCurrentHead, yCurrentHead] = snake[0]
-  const [dX, dY] = directionalChange[direction]
+  const [dX, dY] = directionalChange[currentDirection]
 
   const newHead = [xCurrentHead + dX, yCurrentHead + dY] as Coordinate
   snake.unshift(newHead)
@@ -63,29 +63,26 @@ document.addEventListener("keydown", (event) => {
     case "ArrowLeft": {
       if (currentDirection === "right") return
       currentDirection = "left"
-      updateSnake("left")
       break
     }
     case "ArrowRight": {
       if (currentDirection === "left") return
       currentDirection = "right"
-      updateSnake("right")
       break
     }
     case "ArrowUp": {
       if (currentDirection === "down") return
       currentDirection = "up"
-      updateSnake("up")
       break
     }
     case "ArrowDown": {
       if (currentDirection === "up") return
       currentDirection = "down"
-      updateSnake("down")
       break
     }
     default: {
-      event.preventDefault()
+      return
     }
   }
+  updateSnake()
 })
