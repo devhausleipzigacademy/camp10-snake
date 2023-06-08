@@ -60,6 +60,17 @@ function updateSnake() {
 	const newHead = [xCurrentHead + dX, yCurrentHead + dY] as Coordinate;
 	snake.unshift(newHead);
 
+	if (coordinatesEqual(newHead, apple)) {
+		//update player score
+
+		//update snake body
+
+		//remove the previous apple
+		const el = document.getElementById(coordToId(apple)) as HTMLDivElement;
+		el.classList.remove("apple-square");
+		drawApple();
+	}
+
 	drawSnake(board);
 }
 
