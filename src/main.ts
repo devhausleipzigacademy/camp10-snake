@@ -65,7 +65,23 @@ function updateSnake() {
 	const [dX, dY] = directionalChange[currentDirection];
 
 	const newHead = [xCurrentHead + dX, yCurrentHead + dY] as Coordinate;
+
 	snake.unshift(newHead);
+
+	const snakeHitsItself = snake
+		.slice(1)
+		.some((segment) => coordinatesEqual(segment, newHead));
+
+	if (snakeHitsItself) {
+		//do something
+		console.log("kaboom");
+	}
+
+	// snake hits the wall
+	// const isOutsideLeftWall = newHead[0] < 0;
+	// const isOutsideRightWall;
+	// const isOutsideTopWall;
+	// const isOutsideBottomWall;
 
 	if (coordinatesEqual(newHead, apple)) {
 		//update player score
