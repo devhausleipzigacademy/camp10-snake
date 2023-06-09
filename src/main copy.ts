@@ -1,10 +1,5 @@
 import "./style.css";
-import {
-	coordToId,
-	coordinatesEqual,
-	directionalChange,
-	getNextPosition,
-} from "./utils";
+import { coordToId, coordinatesEqual, directionalChange } from "./utils";
 
 export type Coordinate = [number, number];
 export type Id = `${number}-${number}`;
@@ -20,7 +15,6 @@ const defaultSnake: Array<Coordinate> = [
 	[14, 10],
 ];
 
-let score: number = 0;
 let snake: Array<Coordinate> = defaultSnake;
 
 let apple: Coordinate;
@@ -69,15 +63,8 @@ function updateSnake() {
 
 	if (coordinatesEqual(newHead, apple)) {
 		//update player score
-		score++;
-		const scoreElement = document.getElementById("player-score") as HTMLElement;
-		scoreElement.textContent = `Score: ${score}`;
 
-		//snake.push(snake[snake.length - 1]); <-- this mutates
-
-		const lastSegment = snake[snake.length - 1];
-		const newSegment = getNextPosition(lastSegment, currentDirection);
-		snake = [...snake, newSegment];
+		//update snake body
 
 		//remove the previous apple
 		const el = document.getElementById(coordToId(apple)) as HTMLDivElement;

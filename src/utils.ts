@@ -21,3 +21,11 @@ export function coordinatesEqual(
 ): boolean {
 	return ax === bx && ay === by;
 }
+
+export function getNextPosition(
+	[x, y]: Coordinate,
+	direction: Direction
+): Coordinate {
+	const [dX, dY] = directionalChange[direction];
+	return [x + dX, y + dY] as Coordinate;
+}

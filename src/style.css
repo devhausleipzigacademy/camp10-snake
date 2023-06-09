@@ -31,3 +31,8 @@
 .apple-square {
 	background-color: green;
 }
+
+#player-score {
+	padding: 2rem;
+	font-size: larger;
+}
